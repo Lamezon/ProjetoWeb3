@@ -32,7 +32,7 @@
         color: yellow;
     }
     form{
-        color: blue;
+        color: white;
     }
     .campo-grande{
         background-color: lightgoldenrodyellow;

@@ -12,6 +12,11 @@
                 <?php $this->incluirVisao('util/formErro.php', ['campo' => 'password']) ?>
                 <input id="password" name="password" class="form-control" type="password">
             </div>
+            <div class="form-group <?= $this->getErroCss('password2') ?>">
+                <label class="control-label" for="password2">Reinsert Password *</label>
+                <?php $this->incluirVisao('util/formErro.php', ['campo' => 'password2']) ?>
+                <input id="password2" name="password2" class="form-control" type="password">
+            </div>
             <div class="form-group <?= $this->getErroCss('photo') ?>">
                 <label class="control-label" for="photo">Picture (PNG file)</label>
                 <?php $this->incluirVisao('util/formErro.php', ['campo' => 'photo']) ?>

@@ -15,17 +15,17 @@
     <div class="margin-bottom">
         <form action="<?= URL_RAIZ . 'perguntas' ?>" method="post">
             <div class="form-group <?= $this->getErroCss('texto') ?>">
-                <input id="texto" name="texto" class="form-control campo-medio" autofocus placeholder="Pergunta" value="<?= $this->getPost('texto') ?>">
+                <input id="pergunta" name="pergunta" class="form-control campo-medio" autofocus placeholder="Pergunta" value="<?= $this->getPost('pergunta') ?>">
                 <br>
-                <input id="resposta1" name="resposta1" class="form-control campo-grande" autofocus placeholder="Primeira Alternativa" value="<?= $this->getPost('texto') ?>">
+                <input id="resposta1" name="resposta1" class="form-control campo-grande" autofocus placeholder="Primeira Alternativa" value="<?= $this->getPost('resposta1') ?>">
                 <br>
-                <input id="resposta2" name="resposta2" class="form-control campo-grande" autofocus placeholder="Segunda Alternativa" value="<?= $this->getPost('texto') ?>">
+                <input id="resposta2" name="resposta2" class="form-control campo-grande" autofocus placeholder="Segunda Alternativa" value="<?= $this->getPost('resposta2') ?>">
                 <br>
-                <input id="resposta3" name="resposta3" class="form-control campo-grande" autofocus placeholder="Terceira Alternativa" value="<?= $this->getPost('texto') ?>">
+                <input id="resposta3" name="resposta3" class="form-control campo-grande" autofocus placeholder="Terceira Alternativa" value="<?= $this->getPost('resposta3') ?>">
                 <br>
-                <input id="resposta4" name="resposta4" class="form-control campo-grande" autofocus placeholder="Quarta Alternativa" value="<?= $this->getPost('texto') ?>">
+                <input id="resposta4" name="resposta4" class="form-control campo-grande" autofocus placeholder="Quarta Alternativa" value="<?= $this->getPost('resposta4') ?>">
                 <br>
-                <input id="resposta5" name="resposta5" class="form-control campo-grande" autofocus placeholder="Quinta Alternativa" value="<?= $this->getPost('texto') ?>">
+                <input id="resposta5" name="resposta5" class="form-control campo-grande" autofocus placeholder="Quinta Alternativa" value="<?= $this->getPost('resposta5') ?>">
 
             </div>
             <button type="submit" class="btn btn-default">Criar pergunta</button>

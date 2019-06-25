@@ -12,19 +12,29 @@ class UsuarioControlador extends Controlador
 
     public function armazenar()
     {
-        $photo = array_key_exists('photo', $_FILES) ? $_FILES['photo'] : null;
-        $usuario = new Usuario($_POST['login'], $_POST['password'], $photo);
+        $foto = array_key_exists('foto', $_FILES) ? $_FILES['foto'] : null;
+        $usuario = new Usuario($_POST['login'], $_POST['password'], $foto);
 
         if ($usuario->isValido()) {
-
-            $usuario->salvar();
-            $this->redirecionar(URL_RAIZ . 'usuarios/sucesso');
-
+            if($_POST["password"] === $_POST["password2"]) {
+                if($_POST["login"] !== $_POST["password"]) {
+                    $usuario->salvar();
+                    $this->redirecionar(URL_RAIZ . 'usuarios/sucesso');
+                }else{
+                    $this->setErros($usuario->getValidacaoErros());
+                    $this->visao('usuarios/criar.php');
+                }
+            }else{
+                $this->setErros($usuario->getValidacaoErros());
+                $this->visao('usuarios/criar.php');
+            }
         } else {
             $this->setErros($usuario->getValidacaoErros());
             $this->visao('usuarios/criar.php');
         }
     }
+
+
 
     public function sucesso()
     {

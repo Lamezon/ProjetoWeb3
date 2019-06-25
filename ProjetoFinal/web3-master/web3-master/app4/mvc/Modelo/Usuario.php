@@ -57,6 +57,7 @@ class Usuario extends Modelo
         if (strlen($this->login) < 3) {
             $this->setErroMensagem('login', 'Deve ter no mínimo 3 caracteres.');
         }
+
         if (strlen($this->password_secundario) < 3) {
             $this->setErroMensagem('password', 'Deve ter no mínimo 3 caracteres.');
         }
@@ -67,6 +68,14 @@ class Usuario extends Modelo
             && !DW3ImagemUpload::isValida($this->photo)) {
             $this->setErroMensagem('photo', 'Deve ser de no máximo 500 KB.');
         }
+        if ($_POST["password"] !== $_POST["password2"]) {
+            $this->setErroMensagem('password2', 'Password do not match, try again!');
+        }
+
+        if ($_POST["login"] === $_POST["password"]) {
+            $this->setErroMensagem('password', 'Login and Password can not be the same!');
+        }
+
     }
 
     public function salvar()

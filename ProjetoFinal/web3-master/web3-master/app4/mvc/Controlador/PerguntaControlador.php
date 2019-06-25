@@ -33,7 +33,7 @@ class PerguntaControlador extends Controlador
         $this->verificarLogado();
         $pergunta = new Pergunta(
             DW3Sessao::get('usuario'),
-            @$_POST['perguntas'],
+            $_POST['pergunta, alternativa_1, alternativa_2, alternativa_3, alternativa_4, alternativa_5']
         );
         if ($pergunta->isValido()) {
             $pergunta->salvar();
