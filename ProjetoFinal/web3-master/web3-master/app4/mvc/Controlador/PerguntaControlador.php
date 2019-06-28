@@ -9,11 +9,11 @@ class PerguntaControlador extends Controlador
     private function calcularPaginacao()
     {
         $pagina = array_key_exists('p', $_GET) ? intval($_GET['p']) : 1;
-        $limit = 4;
+        $limit = 5;
         $offset = ($pagina - 1) * $limit;
-        $pergunta = Pergunta::buscarTodos($limit, $offset);
+        $perguntas = Pergunta::buscarTodos($limit, $offset);
         $ultimaPagina = ceil(Pergunta::contarTodos() / $limit);
-        return compact('pagina', 'pergunta', 'ultimaPagina');
+        return compact('pagina', 'perguntas', 'ultimaPagina');
     }
 
     public function index()
@@ -21,7 +21,7 @@ class PerguntaControlador extends Controlador
         $this->verificarLogado();
         $paginacao = $this->calcularPaginacao();
         $this->visao('perguntas/index.php', [
-            'pergunta' => $paginacao['pergunta'],
+            'perguntas' => $paginacao['perguntas'],
             'pagina' => $paginacao['pagina'],
             'ultimaPagina' => $paginacao['ultimaPagina'],
             'mensagemFlash' => DW3Sessao::getFlash('mensagemFlash')
@@ -33,7 +33,12 @@ class PerguntaControlador extends Controlador
         $this->verificarLogado();
         $pergunta = new Pergunta(
             DW3Sessao::get('usuario'),
-            $_POST['pergunta, alternativa_1, alternativa_2, alternativa_3, alternativa_4, alternativa_5']
+            $_POST['pergunta'],
+            $_POST['alternativa1'],
+            $_POST['alternativa2'],
+            $_POST['alternativa3'],
+            $_POST['alternativa4'],
+            $_POST['alternativa5']
         );
         if ($pergunta->isValido()) {
             $pergunta->salvar();

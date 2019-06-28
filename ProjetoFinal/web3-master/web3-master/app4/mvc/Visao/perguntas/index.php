@@ -14,40 +14,40 @@
     <h2>Criar Pergunta</h2>
     <div class="margin-bottom">
         <form action="<?= URL_RAIZ . 'perguntas' ?>" method="post">
-            <div class="form-group <?= $this->getErroCss('texto') ?>">
+            <div class="form-group <?= $this->getErroCss('pergunta') ?>">
                 <input id="pergunta" name="pergunta" class="form-control campo-medio" autofocus placeholder="Pergunta" value="<?= $this->getPost('pergunta') ?>">
                 <br>
-                <input id="resposta1" name="resposta1" class="form-control campo-grande" autofocus placeholder="Primeira Alternativa" value="<?= $this->getPost('resposta1') ?>">
+                <input id="alternativa1" name="alternativa1" class="form-control campo-grande" autofocus placeholder="Primeira Alternativa" value="<?= $this->getPost('alternativa1') ?>">
                 <br>
-                <input id="resposta2" name="resposta2" class="form-control campo-grande" autofocus placeholder="Segunda Alternativa" value="<?= $this->getPost('resposta2') ?>">
+                <input id="alternativa2" name="alternativa2" class="form-control campo-grande" autofocus placeholder="Segunda Alternativa" value="<?= $this->getPost('alternativa2') ?>">
                 <br>
-                <input id="resposta3" name="resposta3" class="form-control campo-grande" autofocus placeholder="Terceira Alternativa" value="<?= $this->getPost('resposta3') ?>">
+                <input id="alternativa3" name="alternativa3" class="form-control campo-grande" autofocus placeholder="Terceira Alternativa" value="<?= $this->getPost('alternativa3') ?>">
                 <br>
-                <input id="resposta4" name="resposta4" class="form-control campo-grande" autofocus placeholder="Quarta Alternativa" value="<?= $this->getPost('resposta4') ?>">
+                <input id="alternativa4" name="alternativa4" class="form-control campo-grande" autofocus placeholder="Quarta Alternativa" value="<?= $this->getPost('alternativa4') ?>">
                 <br>
-                <input id="resposta5" name="resposta5" class="form-control campo-grande" autofocus placeholder="Quinta Alternativa" value="<?= $this->getPost('resposta5') ?>">
+                <input id="alternativa5" name="alternativa5" class="form-control campo-grande" autofocus placeholder="Quinta Alternativa" value="<?= $this->getPost('alternativa5') ?>">
 
             </div>
             <button type="submit" class="btn btn-default">Criar pergunta</button>
 
-            <?php $this->incluirVisao('util/formErro.php', ['campo' => 'texto']) ?>
+            <?php $this->incluirVisao('util/formErro.php', ['campo' => 'pergunta']) ?>
         </form>
 
     </div>
 
     <h2>Todas as perguntas do Q&A</h2>
-    <?php foreach ($pergunta as $pergunta) : ?>
-        <form action="<?= URL_RAIZ . 'perguntas/' . $mensagem->getId() ?>" method="post" class="clearfix margin-bottom">
+    <?php
+    foreach ($perguntas as $pergunta) : ?>
+        <form action="<?= URL_RAIZ . 'perguntas/' . $pergunta->getPergunta() ?>" method="post" class="clearfix margin-bottom">
             <input type="hidden" name="_metodo" value="DELETE">
-            <img src="<?= URL_IMG . $mensagem->getUsuario()->getImagem() ?>" alt="Imagem do perfil" class="imagem-usuario pull-left">
-            <strong><?= $mensagem->getUsuario()->getEmail() ?>:</strong>
-            <?= $mensagem->getTexto() ?>
+
+            <?= $pergunta->getUsuario() ?>
             <br>
             <button type="submit" class="btn btn-xs btn-danger" title="Deletar">
                 <span class="glyphicon glyphicon-trash"></span>
             </button>
         </form>
-    <?php endforeach ?>
+    <?php endforeach; ?>
     <div>
         <?php if ($pagina > 1) : ?>
             <a href="<?= URL_RAIZ . 'perguntas?p=' . ($pagina-1) ?>" class="btn btn-default">Página anterior</a>
@@ -57,3 +57,9 @@
         <?php endif ?>
     </div>
 </div>
+<style>
+    body{
+        background-color: #2a5d84;
+    }
+
+</style>

@@ -18,7 +18,7 @@
     body{
         color: white;
 
-        background-image: linear-gradient(#2a5d84, black);
+        background-image: linear-gradient(#2a5d84, green);
         background-repeat: no-repeat;
         background-size: 2000px 1000px;
     }

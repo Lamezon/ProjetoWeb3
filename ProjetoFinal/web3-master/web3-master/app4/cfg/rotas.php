@@ -23,6 +23,6 @@ $rotas = [
         'POST' => '\Controlador\PerguntaControlador#armazenar',
     ],
     '/perguntas/?' => [
-        'DELETE' => '\Controlador\MensagemControlador#destruir',
+        'DELETE' => '\Controlador\PerguntaControlador#destruir',
     ],
 ];
