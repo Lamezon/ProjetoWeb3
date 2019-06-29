@@ -28,38 +28,38 @@ class PerguntaControlador extends Controlador
         ]);
     }
 
-//    public function armazenar()
-//    {
-//        $this->verificarLogado();
-//        $pergunta = new Pergunta(
-//            DW3Sessao::get('usuario'),
-//            $_POST[$pergunta->getUsuarioId],
-//            $_POST['criador'],
-//            $_POST['dificuldade'],
-//            $_POST['pergunta'],
-//            $_POST['alternativa1'],
-//            $_POST['alternativa2'],
-//            $_POST['alternativa3'],
-//            $_POST['alternativa4'],
-//            $_POST['alternativa5']
-//
-//        );
-//        if ($pergunta->isValido()) {
-//            $pergunta->salvar();
-//            DW3Sessao::setFlash('mensagemFlash', 'Question Created!.');
-//            $this->redirecionar(URL_RAIZ . 'perguntas');
-//
-//        } else {
-//            $paginacao = $this->calcularPaginacao();
-//            $this->setErros($pergunta->getValidacaoErros());
-//            $this->visao('perguntas/index.php', [
-//                'perguntas' => $paginacao['perguntas'],
-//                'pagina' => $paginacao['pagina'],
-//                'ultimaPagina' => $paginacao['ultimaPagina'],
-//                'mensagemFlash' => DW3Sessao::getFlash('mensagemFlash')
-//            ]);
-//        }
-//    }
+    public function armazenar()
+    {
+        $this->verificarLogado();
+        $pergunta = new Pergunta(
+            DW3Sessao::get('usuario'),
+            $_POST['id_usuario'],
+            $_POST['criador'],
+            $_POST['dificuldade'],
+            $_POST['pergunta'],
+            $_POST['alternativa1'],
+            $_POST['alternativa2'],
+            $_POST['alternativa3'],
+            $_POST['alternativa4'],
+            $_POST['alternativa5']
+
+        );
+        if ($pergunta->isValido()) {
+            $pergunta->salvar();
+            DW3Sessao::setFlash('mensagemFlash', 'Question Created!.');
+            $this->redirecionar(URL_RAIZ . 'perguntas');
+
+        } else {
+            $paginacao = $this->calcularPaginacao();
+            $this->setErros($pergunta->getValidacaoErros());
+            $this->visao('perguntas/index.php', [
+                'perguntas' => $paginacao['perguntas'],
+                'pagina' => $paginacao['pagina'],
+                'ultimaPagina' => $paginacao['ultimaPagina'],
+                'mensagemFlash' => DW3Sessao::getFlash('mensagemFlash')
+            ]);
+        }
+    }
 
     public function destruir($id)
     {

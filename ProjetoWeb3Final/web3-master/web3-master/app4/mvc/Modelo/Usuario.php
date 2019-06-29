@@ -116,6 +116,7 @@ class Usuario extends Modelo
                 '',
                 null,
                 $registro['id']
+
             );
             $objeto->password = $registro['password'];
         }
