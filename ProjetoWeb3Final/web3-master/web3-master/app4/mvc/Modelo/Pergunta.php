@@ -1,5 +1,6 @@
 <?php
 namespace Modelo;
+use Framework\DW3Sessao;
 use \PDO;
 use \Framework\DW3BancoDeDados;
 class Pergunta extends Modelo
@@ -125,7 +126,7 @@ class Pergunta extends Modelo
         $comando = DW3BancoDeDados::prepare(self::INSERIR);
         $comando->bindValue(1, $this->id, PDO::PARAM_INT);
         $comando->bindValue(2, $this->id_usuario, PDO::PARAM_STR);
-        $comando->bindValue(3, $this->criador, PDO::PARAM_STR);
+        $comando->bindValue(3, DW3Sessao::get('login'), PDO::PARAM_STR); //XD
         $comando->bindValue(4, $this->dificuldade, PDO::PARAM_STR);
         $comando->bindValue(5, $this->pergunta, PDO::PARAM_STR);
         $comando->bindValue(6, $this->alternativa1, PDO::PARAM_STR);
@@ -136,6 +137,7 @@ class Pergunta extends Modelo
         $comando->execute();
         $this->id = DW3BancoDeDados::getPdo()->lastInsertId();
         DW3BancoDeDados::getPdo()->commit();
+
     }
     public static function buscarId($id)
     {
@@ -157,6 +159,7 @@ class Pergunta extends Modelo
                 $registro['alternativa4'],
                 $registro['alternativa5']
             );
+
         }
         return $objeto;
     }
@@ -175,13 +178,14 @@ class Pergunta extends Modelo
                 $registro['criador'],
                 $registro['dificuldade'],
                 $registro['pergunta'],
-                $registro['alternativa1'],
-                $registro['alternativa2'],
-                $registro['alternativa3'],
-                $registro['alternativa4'],
-                $registro['alternativa5']
+                $registro['alternativa_1'],
+                $registro['alternativa_2'],
+                $registro['alternativa_3'],
+                $registro['alternativa_4'],
+                $registro['alternativa_5']
             );
         }
+
         return $objetos;
     }
     public static function contarTodos()
@@ -199,40 +203,40 @@ class Pergunta extends Modelo
     protected function verificarErros()
     {
         if (strlen($this->pergunta) < 10) {
-            $this->setErroMensagem('pergunta', 'Mínimo 10 caracteres.');
+            $this->setErroMensagem('pergunta', 'Question, minimium size: 10 characters.');
         }
         if (strlen($this->pergunta) > 1000) {
-            $this->setErroMensagem('pergunta', 'Máximo de 1000 caracteres.');
+            $this->setErroMensagem('pergunta', 'Question, max 1000 characters.');
         }
-        if (strlen($this->alternativa1) < 10) {
-            $this->setErroMensagem('alternativa1', 'Alternativa um, mínimo de 1 caracteres.');
+        if (strlen($this->alternativa1) < 1) {
+            $this->setErroMensagem('alternativa1', 'Answer number 1, min 1 character');
         }
         if (strlen($this->alternativa1) > 200) {
-            $this->setErroMensagem('alternativa1', 'Máximo de 200 caracteres.');
+            $this->setErroMensagem('alternativa1', 'Answer 1, max 200 characters.');
         }
-        if (strlen($this->alternativa2) < 10) {
-            $this->setErroMensagem('alternativa2', 'Alternativa um, mínimo de 1 caracteres.');
+        if (strlen($this->alternativa2) < 1) {
+            $this->setErroMensagem('alternativa2', 'Answer number 2, min 1 character');
         }
         if (strlen($this->alternativa2) > 200) {
-            $this->setErroMensagem('alternativa2', 'Máximo de 200 caracteres.');
+            $this->setErroMensagem('alternativa2', 'Answer 2, max 200 characters.');
         }
-        if (strlen($this->alternativa3) < 10) {
-            $this->setErroMensagem('alternativa3', 'Alternativa um, mínimo de 1 caracteres.');
+        if (strlen($this->alternativa3) < 1) {
+            $this->setErroMensagem('alternativa3', 'Answer number 3, min 1 character');
         }
         if (strlen($this->alternativa3) > 200) {
-            $this->setErroMensagem('alternativa3', 'Máximo de 200 caracteres.');
+            $this->setErroMensagem('alternativa3', 'Answer 3, max 200 characters.');
         }
-        if (strlen($this->alternativa4) < 10) {
-            $this->setErroMensagem('alternativa4', 'Alternativa um, mínimo de 1 caracteres.');
+        if (strlen($this->alternativa4) < 1) {
+            $this->setErroMensagem('alternativa4', 'Answer number 4, min 1 character.');
         }
         if (strlen($this->alternativa4) > 200) {
-            $this->setErroMensagem('alternativa4', 'Máximo de 200 caracteres.');
+            $this->setErroMensagem('alternativa4', 'Answer 4, max 200 characters..');
         }
-        if (strlen($this->alternativa5) < 10) {
-            $this->setErroMensagem('alternativa5', 'Alternativa um, mínimo de 1 caracteres.');
+        if (strlen($this->alternativa5) < 1) {
+            $this->setErroMensagem('alternativa5', 'Answer number 4, min 1 character');
         }
         if (strlen($this->alternativa5) > 200) {
-            $this->setErroMensagem('alternativa5', 'Máximo de 200 caracteres.');
+            $this->setErroMensagem('alternativa5', 'Answer 5, max 200 characters.');
         }
 
     }

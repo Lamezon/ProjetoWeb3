@@ -9,7 +9,7 @@ class PerguntaControlador extends Controlador
     private function calcularPaginacao()
     {
         $pagina = array_key_exists('p', $_GET) ? intval($_GET['p']) : 1;
-        $limit = 4;
+        $limit = 3;
         $offset = ($pagina - 1) * $limit;
         $pergunta = Pergunta::buscarTodos($limit, $offset);
         $ultimaPagina = ceil(Pergunta::contarTodos() / $limit);
@@ -32,16 +32,16 @@ class PerguntaControlador extends Controlador
     {
         $this->verificarLogado();
         $pergunta = new Pergunta(
+            null,
+            DW3Sessao::get('id'),
             DW3Sessao::get('usuario'),
-            $_POST['id_usuario'],
-            $_POST['criador'],
-            $_POST['dificuldade'],
+            'facil',
             $_POST['pergunta'],
-            $_POST['alternativa1'],
-            $_POST['alternativa2'],
-            $_POST['alternativa3'],
-            $_POST['alternativa4'],
-            $_POST['alternativa5']
+            $_POST['alternativa_1'],
+            $_POST['alternativa_2'],
+            $_POST['alternativa_3'],
+            $_POST['alternativa_4'],
+            $_POST['alternativa_5']
 
         );
         if ($pergunta->isValido()) {
@@ -53,7 +53,7 @@ class PerguntaControlador extends Controlador
             $paginacao = $this->calcularPaginacao();
             $this->setErros($pergunta->getValidacaoErros());
             $this->visao('perguntas/index.php', [
-                'perguntas' => $paginacao['perguntas'],
+                'perguntas' => $paginacao['pergunta'],
                 'pagina' => $paginacao['pagina'],
                 'ultimaPagina' => $paginacao['ultimaPagina'],
                 'mensagemFlash' => DW3Sessao::getFlash('mensagemFlash')
@@ -65,7 +65,9 @@ class PerguntaControlador extends Controlador
     {
         $this->verificarLogado();
         $pergunta = Pergunta::buscarId($id);
-        if ($pergunta->getUsuarioId() == $this->getUsuario()) {
+
+        if ($pergunta->getIdUsuario() == DW3Sessao::get('id')) {
+            var_dump($id);
             Pergunta::destruir($id);
             DW3Sessao::setFlash('mensagemFlash', 'Question deleted.');
         } else {

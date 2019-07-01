@@ -23,9 +23,9 @@ abstract class Controlador extends DW3Controlador
     {
         if ($this->login == null) {
 
-            var_dump(DW3Sessao::get('usuarios'));
-            exit();
             $login = DW3Sessao::get('login');
+
+
         }
         return $login;
     }

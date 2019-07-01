@@ -16,6 +16,7 @@ class LoginControlador extends Controlador
         $usuario = Usuario::buscarLogin($_POST['login']);
         if ($usuario && $usuario->verificarSenha($_POST['password'])) {
             DW3Sessao::set('login', $usuario->getLogin());
+            DW3Sessao::set('id', $usuario->getId());
             $this->redirecionar(URL_RAIZ . 'perguntas');
         } else {
             $this->setErros(['login' => 'Login or Password do not match']);
@@ -25,7 +26,7 @@ class LoginControlador extends Controlador
 
     public function destruir()
     {
-        DW3Sessao::deletar('usuario');
+        DW3Sessao::deletar('login');
         $this->redirecionar(URL_RAIZ . 'login');
     }
 }

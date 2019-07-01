@@ -16,7 +16,7 @@
             <button type="submit" class="btn btn-default center-block">Sign in</button>
         </form>
         <p class="text-center">
-            <a href="<?= URL_RAIZ . 'usuarios/criar' ?>">Not a member? <br> Sign in</a>
+            <a href="<?= URL_RAIZ . 'usuarios/criar' ?>">Not a member? <br> Sign up</a>
         </p>
     </div>
 </div>

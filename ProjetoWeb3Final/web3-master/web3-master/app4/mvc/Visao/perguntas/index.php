@@ -23,15 +23,15 @@
             <div class="form-group <?= $this->getErroCss('pergunta') ?>">
                 <input id="pergunta" name="pergunta" class="form-control campo-medio" autofocus placeholder="Question" value="<?= $this->getPost('pergunta') ?>">
                 <br>
-                <input id="alternativa1" name="alternativa1" class="form-control campo-grande" autofocus placeholder="First Answer" value="<?= $this->getPost('alternativa1') ?>">
+                <input id="alternativa_1" name="alternativa_1" class="form-control campo-grande" autofocus placeholder="First Answer" value="<?= $this->getPost('alternativa_1') ?>">
                 <br>
-                <input id="alternativa2" name="alternativa2" class="form-control campo-grande" autofocus placeholder="Second Answer" value="<?= $this->getPost('alternativa2') ?>">
+                <input id="alternativa_2" name="alternativa_2" class="form-control campo-grande" autofocus placeholder="Second Answer" value="<?= $this->getPost('alternativa_2') ?>">
                 <br>
-                <input id="alternativa3" name="alternativa3" class="form-control campo-grande" autofocus placeholder="Third Answer" value="<?= $this->getPost('alternativa3') ?>">
+                <input id="alternativa_3" name="alternativa_3" class="form-control campo-grande" autofocus placeholder="Third Answer" value="<?= $this->getPost('alternativa_3') ?>">
                 <br>
-                <input id="alternativa4" name="alternativa4" class="form-control campo-grande" autofocus placeholder="Fourth Answer" value="<?= $this->getPost('alternativa4') ?>">
+                <input id="alternativa_4" name="alternativa_4" class="form-control campo-grande" autofocus placeholder="Fourth Answer" value="<?= $this->getPost('alternativa_4') ?>">
                 <br>
-                <input id="alternativa5" name="alternativa5" class="form-control campo-grande" autofocus placeholder="Fifth Answer" value="<?= $this->getPost('alternativa5') ?>">
+                <input id="alternativa_5" name="alternativa_5" class="form-control campo-grande" autofocus placeholder="Fifth Answer" value="<?= $this->getPost('alternativa_5') ?>">
 
             </div>
             <div class="form-group <?= $this->getErroCss('dificulty') ?>">
@@ -47,17 +47,22 @@
             <button type="submit" class="btn btn-default">Create Question</button>
 
             <?php $this->incluirVisao('util/formErro.php', ['campo' => 'pergunta']) ?>
+            <?php $this->incluirVisao('util/formErro.php', ['campo' => 'alternativa_1']) ?>
+            <?php $this->incluirVisao('util/formErro.php', ['campo' => 'alternativa_2']) ?>
+            <?php $this->incluirVisao('util/formErro.php', ['campo' => 'alternativa_3']) ?>
+            <?php $this->incluirVisao('util/formErro.php', ['campo' => 'alternativa_4']) ?>
+            <?php $this->incluirVisao('util/formErro.php', ['campo' => 'alternativa_5']) ?>
         </form>
 
     </div>
 
     <h2>All Q&A</h2>
     <?php
-    foreach ($perguntas as $pergunta) : ?>
-        <form action="<?= URL_RAIZ . 'perguntas/' . $perguntas->getPergunta() ?>" method="post" class="clearfix margin-bottom">
+    foreach ($perguntas as $perguntas) : ?>
+        <form action="<?= URL_RAIZ . 'perguntas/' . $perguntas->getId() ?>" method="post" class="clearfix margin-bottom">
             <input type="hidden" name="_metodo" value="DELETE">
 
-            <?= $perguntas->getUsuario() ?>
+            <?= $perguntas->getPergunta() ?>
             <br>
             <button type="submit" class="btn btn-xs btn-danger" title="Deletar">
                 <span class="glyphicon glyphicon-trash"></span>
