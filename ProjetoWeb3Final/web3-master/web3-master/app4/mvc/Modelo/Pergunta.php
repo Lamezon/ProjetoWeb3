@@ -13,7 +13,7 @@ class Pergunta extends Modelo
     //  const BUSCAR_TODOS = 'SELECT * FROM perguntas p JOIN usuarios u ON (p.id_usuario = u.id) ORDER BY u.id LIMIT ? OFFSET ?';
     //const INSERIR = 'INSERT INTO perguntas(id_usuario,pergunta, alternativa_1, alternativa_2, alternativa_3, alternativa_4, alternativa_5 ) VALUES (?, ?, ?, ?, ?, ?, ?)';
     const INSERIR = 'INSERT INTO `perguntas` (`id`, `id_usuario`, `criador`, `dificuldade`, `pergunta`, `alternativa_1`, `alternativa_2`, `alternativa_3`, `alternativa_4`, `alternativa_5`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
-    const DELETAR = 'DELETE FROM pergunta WHERE id = ?';
+    const DELETAR = 'DELETE FROM perguntas WHERE id = ?';
     const CONTAR_TODOS = 'SELECT count(id) FROM perguntas';
     private $id;
     private $id_usuario;
@@ -153,11 +153,11 @@ class Pergunta extends Modelo
                 $registro['criador'],
                 $registro['dificuldade'],
                 $registro['pergunta'],
-                $registro['alternativa1'],
-                $registro['alternativa2'],
-                $registro['alternativa3'],
-                $registro['alternativa4'],
-                $registro['alternativa5']
+                $registro['alternativa_1'],
+                $registro['alternativa_2'],
+                $registro['alternativa_3'],
+                $registro['alternativa_4'],
+                $registro['alternativa_5']
             );
 
         }

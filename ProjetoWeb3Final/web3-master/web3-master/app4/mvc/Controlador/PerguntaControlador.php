@@ -9,7 +9,7 @@ class PerguntaControlador extends Controlador
     private function calcularPaginacao()
     {
         $pagina = array_key_exists('p', $_GET) ? intval($_GET['p']) : 1;
-        $limit = 3;
+        $limit = 5;
         $offset = ($pagina - 1) * $limit;
         $pergunta = Pergunta::buscarTodos($limit, $offset);
         $ultimaPagina = ceil(Pergunta::contarTodos() / $limit);
@@ -35,7 +35,7 @@ class PerguntaControlador extends Controlador
             null,
             DW3Sessao::get('id'),
             DW3Sessao::get('usuario'),
-            'facil',
+            $_POST['dificulty'],
             $_POST['pergunta'],
             $_POST['alternativa_1'],
             $_POST['alternativa_2'],
@@ -67,7 +67,6 @@ class PerguntaControlador extends Controlador
         $pergunta = Pergunta::buscarId($id);
 
         if ($pergunta->getIdUsuario() == DW3Sessao::get('id')) {
-            var_dump($id);
             Pergunta::destruir($id);
             DW3Sessao::setFlash('mensagemFlash', 'Question deleted.');
         } else {

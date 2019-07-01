@@ -1,5 +1,5 @@
 <div class="center-block site">
-    <h1 class="text-center">Q&A Online</h1>
+    <h1 class="text-center">Perguntas Online</h1>
 
     <?php if ($mensagemFlash) : ?>
         <div class="alert alert-success alert-dismissible">
@@ -81,11 +81,6 @@
 <style>
     body{
         background-color: #2a5d84;
-    }
-    #photo{
-        height: 40px;
-        width: 148px;
-        background-color: darkblue;
     }
 
 </style>
