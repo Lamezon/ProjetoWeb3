@@ -25,7 +25,10 @@ $rotas = [
     '/perguntas/?' => [
         'DELETE' => '\Controlador\PerguntaControlador#destruir',
     ],
-    '/perguntas/responder' => [
+    '/perguntas/responder/?' => [
         'GET' => '\Controlador\ResponderControlador#index',
+    ],
+    '/perguntas/relatorio' => [
+        'GET' => '\Controlador\RelatorioControlador#index',
     ],
 ];

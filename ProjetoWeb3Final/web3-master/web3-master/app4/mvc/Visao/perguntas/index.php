@@ -7,9 +7,15 @@
             <?= $mensagemFlash ?>
         </div>
     <?php endif ?>
+
+    <form action="<?= URL_RAIZ . 'perguntas/relatorio';?>" method="get">
+        <input type="hidden" name="_metodo" value="GET">
+        <button type="submit" class="btn btn-success">Relatorio</button>
+    </form>
+
     <form action="<?= URL_RAIZ . 'login' ?>" method="post">
         <input type="hidden" name="_metodo" value="DELETE">
-        <button type="submit" class="btn btn-danger">Logout.</button>
+        <button type="submit" class="btn btn-danger">Logout</button>
     </form>
     <h2>Create Question</h2>
     <div class="margin-bottom">
@@ -59,15 +65,20 @@
     <h2>All Q&A</h2>
     <?php
     foreach ($perguntas as $perguntas) : ?>
+        <form action="<?= URL_RAIZ . 'perguntas/responder/' . $perguntas->getId();?>" method="post">
+            <input type="hidden" name="_metodo" value="GET">
+            <?= $perguntas->getPergunta() ?>
+            <button type="submit" class="btn btn-xs btn-group-xs" title="Answer" id="editar"> ANSWER
+                <span class="glyphicon glyphicon-education"></span>
+            </button>
+        </form>
         <form action="<?= URL_RAIZ . 'perguntas/' . $perguntas->getId() ?>" method="post" class="clearfix margin-bottom">
             <input type="hidden" name="_metodo" value="DELETE">
-
-            <?= $perguntas->getPergunta() ?>
-            <br>
-            <button type="submit" class="btn btn-xs btn-danger" title="Deletar">
+            <button type="submit" class="btn btn-xs btn-danger" title="Delete">
                 <span class="glyphicon glyphicon-trash"></span>
             </button>
         </form>
+    --------------------------------------------------------------------------
     <?php endforeach; ?>
     <div>
         <?php if ($pagina > 1) : ?>
@@ -88,4 +99,8 @@
         background-color: darkblue;
     }
 
+    #editar{
+        color: black;
+        background-color: #2b669a;
+    }
 </style>

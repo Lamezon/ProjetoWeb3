@@ -1,86 +1,101 @@
 <div class="center-block site">
-    <h1 class="text-center">Perguntas Online</h1>
+    <h1 class="text-center">Q&A Online</h1>
 
-    <?php if ($mensagemFlash) : ?>
-        <div class="alert alert-success alert-dismissible">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <?= $mensagemFlash ?>
+    <form class="form-horizontal" method="POST" action="<?= URL_RAIZ . 'perguntas' ?>">
+        <fieldset>
+            <legend id="titulo"><?= $perguntas->getPergunta()?></legend>
+
+            <?php
+            switch ($perguntas->getDificuldade()){
+                case '1': ?><easy>Easy Question </easy><?php break;
+                case '2': ?><medium>Medium Question </medium> <?php break;
+                case '3': ?><hard>Hard Question </hard><?php break;
+            }
+
+            ?>
+            <!-- Multiple Radios -->
+
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="radios" id="correct">Correct Answer:</label>
+                <div class="col-md-4">
+                    <div class="radio">
+                        <label for="radios-0" id="answer">
+                            <input type="radio" name="radios" id="radios-0" value="1" checked="checked">
+                            <?= $perguntas->getAlternativa1()?>
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label for="radios-1" id="answer">
+                            <input type="radio" name="radios" id="radios-1" value="2">
+                            <?= $perguntas->getAlternativa2()?>
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label for="radios-2" id="answer">
+                            <input type="radio" name="radios" id="radios-2" value="3">
+                            <?= $perguntas->getAlternativa3()?>
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label for="radios-3" id="answer">
+                            <input type="radio" name="radios" id="radios-3" value="4">
+                            <?= $perguntas->getAlternativa4()?>
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label for="radios-4" id="answer">
+                            <input type="radio" name="radios" id="radios-4" value="5">
+                            <?= $perguntas->getAlternativa5()?>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+        </fieldset>
+        <div id="send">
+
+            <button type="submit" class="btn btn-success" >Submit</button>
+            </form>
+            <form action="<?= URL_RAIZ ?>perguntas" method="get">
+            <button type="submit" class="btn btn-danger" >Back</button>
+            </form>
         </div>
-    <?php endif ?>
-    <form action="<?= URL_RAIZ . 'login' ?>" method="post">
-        <input type="hidden" name="_metodo" value="DELETE">
-        <button type="submit" class="btn btn-danger">Logout.</button>
     </form>
-    <h2>Create Question</h2>
-    <div class="margin-bottom">
-        <form action="<?= URL_RAIZ . 'perguntas' ?>" method="post" enctype="multipart/form-data">
-            <div class="form-group <?= $this->getErroCss('photo') ?>">
-                <label class="control-label" for="photo">Question Picture (PNG file)</label>
-                <?php $this->incluirVisao('util/formErro.php', ['campo' => 'photo']) ?>
-                <input id="photo" name="photo" class="form-control" type="file">
-            </div>
-            <br><br>
-            <div class="form-group <?= $this->getErroCss('pergunta') ?>">
-                <input id="pergunta" name="pergunta" class="form-control campo-medio" autofocus placeholder="Question" value="<?= $this->getPost('pergunta') ?>">
-                <br>
-                <input id="alternativa_1" name="alternativa_1" class="form-control campo-grande" autofocus placeholder="First Answer" value="<?= $this->getPost('alternativa_1') ?>">
-                <br>
-                <input id="alternativa_2" name="alternativa_2" class="form-control campo-grande" autofocus placeholder="Second Answer" value="<?= $this->getPost('alternativa_2') ?>">
-                <br>
-                <input id="alternativa_3" name="alternativa_3" class="form-control campo-grande" autofocus placeholder="Third Answer" value="<?= $this->getPost('alternativa_3') ?>">
-                <br>
-                <input id="alternativa_4" name="alternativa_4" class="form-control campo-grande" autofocus placeholder="Fourth Answer" value="<?= $this->getPost('alternativa_4') ?>">
-                <br>
-                <input id="alternativa_5" name="alternativa_5" class="form-control campo-grande" autofocus placeholder="Fifth Answer" value="<?= $this->getPost('alternativa_5') ?>">
-
-            </div>
-            <div class="form-group <?= $this->getErroCss('dificulty') ?>">
-                <label class="control-label" for="dificulty">Dificulty</label>
-                <?php $this->incluirVisao('util/formErro.php', ['campo' => 'dificulty']) ?>
-                <select id="dificulty" name="dificulty" class="form-control" autofocus>
-                        <?php $selected = $this->getPost('dificulty')  ? 'selected' : '' ?>
-                        <option value=1>Easy</option>
-                        <option value=2>Medium</option>
-                        <option value=3>Hard</option>
-                </select>
-            </div>
-            <button type="submit" class="btn btn-default">Create Question</button>
-
-            <?php $this->incluirVisao('util/formErro.php', ['campo' => 'pergunta']) ?>
-            <?php $this->incluirVisao('util/formErro.php', ['campo' => 'alternativa_1']) ?>
-            <?php $this->incluirVisao('util/formErro.php', ['campo' => 'alternativa_2']) ?>
-            <?php $this->incluirVisao('util/formErro.php', ['campo' => 'alternativa_3']) ?>
-            <?php $this->incluirVisao('util/formErro.php', ['campo' => 'alternativa_4']) ?>
-            <?php $this->incluirVisao('util/formErro.php', ['campo' => 'alternativa_5']) ?>
-        </form>
-
-    </div>
-
-    <h2>All Q&A</h2>
-    <?php
-    foreach ($perguntas as $perguntas) : ?>
-        <form action="<?= URL_RAIZ . 'perguntas/' . $perguntas->getId() ?>" method="post" class="clearfix margin-bottom">
-            <input type="hidden" name="_metodo" value="DELETE">
-
-            <?= $perguntas->getPergunta() ?>
-            <br>
-            <button type="submit" class="btn btn-xs btn-danger" title="Deletar">
-                <span class="glyphicon glyphicon-trash"></span>
-            </button>
-        </form>
-    <?php endforeach; ?>
-    <div>
-        <?php if ($pagina > 1) : ?>
-            <a href="<?= URL_RAIZ . 'perguntas?p=' . ($pagina-1) ?>" class="btn btn-default">Prev</a>
-        <?php endif ?>
-        <?php if ($pagina < $ultimaPagina) : ?>
-            <a href="<?= URL_RAIZ . 'perguntas?p=' . ($pagina+1) ?>" class="btn btn-default">Next</a>
-        <?php endif ?>
-    </div>
 </div>
+
+
 <style>
     body{
         background-color: #2a5d84;
     }
+    #titulo{
+        color: black;
+    }
 
+    #correct{
+        color: #00fa00;
+    }
+    #answer{
+        color: #bfbf00;
+    }
+
+    easy{
+        color: deeppink;
+    }
+    medium{
+        color: #bfbf00;
+    }
+    hard{
+        color: red;
+    }
+    legend{
+        font-size: 35px;
+    }
+    #send{
+
+     display: flex;
+        align-items: center;
+        justify-content: center;
+
+    }
 </style>
