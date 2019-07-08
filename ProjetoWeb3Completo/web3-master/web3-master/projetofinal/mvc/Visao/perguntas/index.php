@@ -10,7 +10,7 @@
 
     <form action="<?= URL_RAIZ . 'perguntas/relatorio';?>" method="get">
         <input type="hidden" name="_metodo" value="GET">
-        <button type="submit" class="btn btn-success" name="filterSelect">Relatorio</button>
+        <button type="submit" class="btn btn-success" name="filterSelect">Questions Info</button>
 
     </form>
 

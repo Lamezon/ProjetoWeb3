@@ -15,6 +15,7 @@ class Pergunta extends Modelo
     //const INSERIR = 'INSERT INTO perguntas(id_usuario,pergunta, alternativa_1, alternativa_2, alternativa_3, alternativa_4, alternativa_5 ) VALUES (?, ?, ?, ?, ?, ?, ?)';
     const INSERIR = 'INSERT INTO `perguntas` (`id`, `id_usuario`, `criador`, `dificuldade`, `pergunta`, `alternativa_1`, `alternativa_2`, `alternativa_3`, `alternativa_4`, `alternativa_5`, `foto_pergunta`, `erros`, `correta`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
     const DELETAR = 'DELETE FROM perguntas WHERE id = ?';
+    const DELETAR_RESPOSTAS = 'DELETE FROM usuarioresposta WHERE id_pergunta = ?';
     const CONTAR_TODOS = 'SELECT count(id) FROM perguntas';
     private $id;
     private $id_usuario;
@@ -266,9 +267,13 @@ class Pergunta extends Modelo
     }
     public static function destruir($id)
     {
+        $comando = DW3BancoDeDados::prepare(self::DELETAR_RESPOSTAS);
+        $comando->bindValue(1, $id, PDO::PARAM_INT);
+        $comando->execute();
         $comando = DW3BancoDeDados::prepare(self::DELETAR);
         $comando->bindValue(1, $id, PDO::PARAM_INT);
         $comando->execute();
+
     }
     protected function verificarErros()
     {
@@ -303,7 +308,7 @@ class Pergunta extends Modelo
             $this->setErroMensagem('alternativa_4', 'Answer 4, max 200 characters..');
         }
         if (strlen($this->alternativa5) < 1) {
-            $this->setErroMensagem('alternativa_5', 'Answer number 4, min 1 character');
+            $this->setErroMensagem('alternativa_5', 'Answer number 5, min 1 character');
         }
         if (strlen($this->alternativa5) > 200) {
             $this->setErroMensagem('alternativa_5', 'Answer 5, max 200 characters.');

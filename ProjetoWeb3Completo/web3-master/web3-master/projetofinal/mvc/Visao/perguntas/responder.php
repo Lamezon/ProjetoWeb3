@@ -1,9 +1,10 @@
 <div class="center-block site">
     <h1 class="text-center">Q&A Online</h1>
 
-    <form class="form-horizontal" method="POST" action="<?= URL_RAIZ . 'perguntas/responder/' . $perguntas->getId() ?>">
+    <form class="form-horizontal" method="POST" name="resposta" action="<?= URL_RAIZ . 'perguntas/responder/' . $perguntas->getId() ?>">
         <fieldset>
             <legend id="titulo"><?= $perguntas->getPergunta()?></legend>
+            <legend><?= $perguntas->getFotoPergunta() ?></legend>
 
             <?php
 
@@ -14,46 +15,33 @@
             }
             ?>
             <div class="form-group" name="respostas">
-                <label class="col-md-4 control-label" for="respostas" id="resposta">Correct Answer:</label>
-                <div class="col-md-4">
-                    <div class="radio">
-                        <label for="radios-0" id="answer">
-                            <input type="radio" name="respostas" id="resposta1" value="1" checked="checked">
-                            <?= $perguntas->getAlternativa1()?>
-                        </label>
-                    </div>
-                    <div class="radio">
-                        <label for="radios-1" id="answer">
-                            <input type="radio" name="respostas" id="resposta2" value="2">
-                            <?= $perguntas->getAlternativa2()?>
-                        </label>
-                    </div>
-                    <div class="radio">
-                        <label for="radios-2" id="answer">
-                            <input type="radio" name="respostas" id="resposta3" value="3">
-                            <?= $perguntas->getAlternativa3()?>
-                        </label>
-                    </div>
-                    <div class="radio">
-                        <label for="radios-3" id="answer">
-                            <input type="radio" name="respostas" id="resposta4" value="4">
-                            <?= $perguntas->getAlternativa4()?>
-                        </label>
-                    </div>
-                    <div class="radio">
-                        <label for="radios-4" id="answer">
-                            <input type="radio" name="respostas" id="resposta5" value="5">
-                            <?= $perguntas->getAlternativa5()?>
-                        </label>
-                    </div>
-                </div>
+                <h4>Answer 1: </h4><h5><?=$perguntas->getAlternativa1()?></h5>
+                <h4>Answer 2: </h4><h5><?=$perguntas->getAlternativa2()?></h5>
+                <h4>Answer 3: </h4><h5><?=$perguntas->getAlternativa3()?></h5>
+                <h4>Answer 4: </h4><h5><?=$perguntas->getAlternativa4()?></h5>
+                <h4>Answer 5: </h4><h5><?=$perguntas->getAlternativa5()?></h5>
             </div>
 
+
+            <h3>Correct Answer is:</h3>
+                <select name="respostaSelecionada" id="select">
+                    <option selected="selected" value=0 disabled="">----</option>
+                    <option value=1>Answer 1</option>
+                    <option value=2>Answer 2</option>
+                    <option value=3>Answer 3</option>
+                    <option value=4>Answer 4</option>
+                    <option value=5>Answer 5</option>
+                </select>
+                <input type="submit" value="Confirm" class="btn btn-sucess" id="confirmbutton">
         </fieldset>
         <div id="send">
+            <?php
+            $id_pergunta = $perguntas->getId();
+            $id_usuario = $perguntas->getIdUsuario();
 
-            <button type="submit" class="btn btn-success" >Submit</button>
+            ?>
     </form>
+
     <form action="<?= URL_RAIZ ?>perguntas" method="get">
 </div>
 <div id="back">
@@ -69,15 +57,11 @@
     body{
         background-color: #2a5d84;
     }
+    #confirmbutton{
+        background: green;
+    }
     #titulo{
-        color: black;
-    }
-
-    #correct{
-        color: #00fa00;
-    }
-    #answer{
-        color: #bfbf00;
+        color: yellow;
     }
 
     easy{
@@ -86,10 +70,18 @@
     medium{
         color: #bfbf00;
     }
+    h4{
+        text-decoration: underline;
+        font-size: 20px;
+    }
+    h5{
+        color: yellow;
+    }
     hard{
         color: red;
     }
     legend{
+        color: white;
         font-size: 35px;
     }
     #send, #back{
@@ -98,6 +90,10 @@
         align-items: center;
         justify-content: center;
 
+    }
+    #select {
+        color: black;
+        background-color: green;
     }
 
 </style>

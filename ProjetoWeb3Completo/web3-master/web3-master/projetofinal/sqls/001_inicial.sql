@@ -24,7 +24,6 @@ CREATE TABLE `perguntas` (
 );
 
 CREATE TABLE `usuarioresposta` (
-	`id` INT(255) NOT NULL,
 	`id_usuario` INT(255) NOT NULL,
 	`id_pergunta` INT(255) NOT NULL,
 	`resposta` INT(5) NOT NULL

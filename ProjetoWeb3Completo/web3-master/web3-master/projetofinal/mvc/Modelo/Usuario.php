@@ -55,18 +55,18 @@ class Usuario extends Modelo
     protected function verificarErros()
     {
         if (strlen($this->login) < 3) {
-            $this->setErroMensagem('login', 'Deve ter no mínimo 3 caracteres.');
+            $this->setErroMensagem('login', 'Login size is not enough.');
         }
 
         if (strlen($this->password_secundario) < 3) {
-            $this->setErroMensagem('password', 'Deve ter no mínimo 3 caracteres.');
+            $this->setErroMensagem('password', 'Password size is not enough.');
         }
         if (self::buscarLogin($this->login) != null ) {
-            $this->setErroMensagem('login', 'Login já existe.');
+            $this->setErroMensagem('login', 'Login already used.');
         }
         if (DW3ImagemUpload::existeUpload($this->photo)
             && !DW3ImagemUpload::isValida($this->photo)) {
-            $this->setErroMensagem('photo', 'Deve ser de no máximo 500 KB.');
+            $this->setErroMensagem('photo', 'Picture with size max = 500 KB.');
         }
         if ($_POST["password"] !== $_POST["password2"]) {
             $this->setErroMensagem('password2', 'Password do not match, try again!');

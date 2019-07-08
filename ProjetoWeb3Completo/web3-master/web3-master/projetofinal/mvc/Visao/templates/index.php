@@ -18,9 +18,10 @@
     body{
         color: white;
 
-        background-image: linear-gradient(#2a5d84, green);
+        background-image: linear-gradient(black, #1f3c52);
         background-repeat: no-repeat;
-        background-size: 4000px 1400px;
+
+        background-size: 5000px 1400px;
     }
     a{
         color: white;

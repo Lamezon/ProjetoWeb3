@@ -29,19 +29,6 @@ class PerguntaControlador extends Controlador
     }
 
 
-    public function armazenarResposta()
-    {
-        $this->verificarLogado();
-        $pergunta = new Pergunta(
-            null,
-            DW3Sessao::get('id'),
-            DW3Sessao::get('usuario'),
-            $_POST['resposta']
-
-        );
-        var_dump($_POST['resposta']);
-    }
-
 
         public function armazenar()
     {

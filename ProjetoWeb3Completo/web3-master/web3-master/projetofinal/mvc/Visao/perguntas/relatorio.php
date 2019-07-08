@@ -13,6 +13,7 @@
             <th id="tableHeader">Level</th>
             <th id="tableHeader">Question</th>
             <th id="tableHeader">Errors</th>
+            <th id="tableHeader">Creator</th>
             <th id="tableHeader">Answer</th>
         </tr>
         <?php
@@ -32,6 +33,7 @@
                                 <td id="easy"> Easy</td>
                                 <td class="tg-0lax"><?= $registros->getPergunta() ?></td>
                                 <td class="tg-0lax"><?= $registros->getErros() ?></td>
+                                <td class="tg-0lax"><?= $registros->getCriador() ?></td>
                                 <td> <form action="<?= URL_RAIZ . 'perguntas/responder/' . $registros->getId() ?>"><button type="submit" class="btn btn-outline-primary" title="Answer" id="responderP" > </form></td>
 
                             </tr>
@@ -45,6 +47,7 @@
                             <td id="medium"> Medium</td>
                             <td class="tg-0lax"><?= $registros->getPergunta() ?></td>
                             <td class="tg-0lax"><?= $registros->getErros() ?></td>
+                            <td class="tg-0lax"><?= $registros->getCriador() ?></td>
                             <td> <form action="<?= URL_RAIZ . 'perguntas/responder/' . $registros->getId() ?>"><button type="submit" class="btn btn-outline-primary" title="Answer" id="responderP" > </form></td>
 
                             </tr>
@@ -57,6 +60,7 @@
                             <td id="hard"> Hard</td>
                             <td class="tg-0lax"><?= $registros->getPergunta() ?></td>
                             <td class="tg-0lax"><?= $registros->getErros() ?></td>
+                            <td class="tg-0lax"><?= $registros->getCriador() ?></td>
                             <td> <form action="<?= URL_RAIZ . 'perguntas/responder/' . $registros->getId() ?>"><button type="submit" class="btn btn-outline-primary" title="Answer" id="responderP" > </form></td>
 
                             </tr>
@@ -87,6 +91,7 @@
                         } ?>
                         <td class="tg-0lax"><?= $perguntas->getPergunta() ?></td>
                         <td class="tg-0lax"><?= $perguntas->getErros() ?></td>
+                        <td class="tg-0lax"><?= $registros->getCriador() ?></td>
                         <td> <form action="<?= URL_RAIZ . 'perguntas/responder/' . $registros->getId() ?>"><button type="submit" class="btn btn-outline-primary" title="Answer" id="responderP" > </form></td>
 
                         </tr>
