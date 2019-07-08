@@ -13,21 +13,14 @@ class RelatorioControlador extends Controlador
     {
         $this->verificarLogado();
         $this->visao('perguntas/relatorio.php', [
+            $valor = intval($_GET['filterSelect']),
             'perguntas' =>Pergunta::buscarTodos(),
-            'registros' => Pergunta::buscarFiltro($_GET)
+            'registros' => Pergunta::buscarFiltro($valor)
 
         ]);
     }
 
-    /*private function calcularPaginacao()
-    {
-        $pagina = array_key_exists('p', $_GET) ? intval($_GET['p']) : 1;
-        $limit = 5;
-        $offset = ($pagina - 1) * $limit;
-        $pergunta = Pergunta::buscarTodos($limit, $offset);
-        $ultimaPagina = ceil(Pergunta::contarTodos() / $limit);
-        return compact('pagina', 'pergunta', 'ultimaPagina');
-    }*/
+
 
 
 

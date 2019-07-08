@@ -1,5 +1,6 @@
 <form method="GET" action="">
     <select name="filterSelect" id="select">
+        <option selected="selected" value=0>----</option>
         <option value=1>Easy Questions</option>
         <option value=2>Medium Questions</option>
         <option value=3>Hard Questions</option>
@@ -12,6 +13,7 @@
             <th id="tableHeader">Level</th>
             <th id="tableHeader">Question</th>
             <th id="tableHeader">Errors</th>
+            <th id="tableHeader">Answer</th>
         </tr>
         <?php
 
@@ -30,6 +32,8 @@
                                 <td id="easy"> Easy</td>
                                 <td class="tg-0lax"><?= $registros->getPergunta() ?></td>
                                 <td class="tg-0lax"><?= $registros->getErros() ?></td>
+                                <td> <form action="<?= URL_RAIZ . 'perguntas/responder/' . $registros->getId() ?>"><button type="submit" class="btn btn-outline-primary" title="Answer" id="responderP" > </form></td>
+
                             </tr>
 
                             <?php
@@ -41,6 +45,8 @@
                             <td id="medium"> Medium</td>
                             <td class="tg-0lax"><?= $registros->getPergunta() ?></td>
                             <td class="tg-0lax"><?= $registros->getErros() ?></td>
+                            <td> <form action="<?= URL_RAIZ . 'perguntas/responder/' . $registros->getId() ?>"><button type="submit" class="btn btn-outline-primary" title="Answer" id="responderP" > </form></td>
+
                             </tr>
                             <?php
                         }
@@ -51,6 +57,8 @@
                             <td id="hard"> Hard</td>
                             <td class="tg-0lax"><?= $registros->getPergunta() ?></td>
                             <td class="tg-0lax"><?= $registros->getErros() ?></td>
+                            <td> <form action="<?= URL_RAIZ . 'perguntas/responder/' . $registros->getId() ?>"><button type="submit" class="btn btn-outline-primary" title="Answer" id="responderP" > </form></td>
+
                             </tr>
                             <?php
                         }
@@ -79,6 +87,8 @@
                         } ?>
                         <td class="tg-0lax"><?= $perguntas->getPergunta() ?></td>
                         <td class="tg-0lax"><?= $perguntas->getErros() ?></td>
+                        <td> <form action="<?= URL_RAIZ . 'perguntas/responder/' . $registros->getId() ?>"><button type="submit" class="btn btn-outline-primary" title="Answer" id="responderP" > </form></td>
+
                         </tr>
                     <?php
                     endforeach;
@@ -113,6 +123,11 @@
     }
     #hard {
         color: red;
+    }
+    #responderP {
+
+        background-color: yellow;
+    }
     }
 
 </style>

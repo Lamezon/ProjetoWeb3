@@ -57,7 +57,7 @@ class PerguntaControlador extends Controlador
             $_POST['alternativa_3'],
             $_POST['alternativa_4'],
             $_POST['alternativa_5'],
-            $_POST['foto_pergunta'],
+            null,
             0,
             $_POST['correta']
 

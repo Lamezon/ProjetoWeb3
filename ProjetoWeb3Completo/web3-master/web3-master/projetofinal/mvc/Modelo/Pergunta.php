@@ -226,7 +226,12 @@ class Pergunta extends Modelo
 
     public static function buscarFiltro($dificuldade, $limit = 100, $offset = 0)
     {
+
         $int = (int)$dificuldade;
+        if($int==0){
+            return self::buscarTodos();
+
+        }
         $comando = DW3BancoDeDados::prepare(self::BUSCAR_FILTRO);
         $comando->bindValue(1, $int, PDO::PARAM_INT);
         $comando->bindValue(2, $limit, PDO::PARAM_INT);
@@ -274,34 +279,34 @@ class Pergunta extends Modelo
             $this->setErroMensagem('pergunta', 'Question, max 1000 characters.');
         }
         if (strlen($this->alternativa1) < 1) {
-            $this->setErroMensagem('alternativa1', 'Answer number 1, min 1 character');
+            $this->setErroMensagem('alternativa_1', 'Answer number 1, min 1 character');
         }
         if (strlen($this->alternativa1) > 200) {
-            $this->setErroMensagem('alternativa1', 'Answer 1, max 200 characters.');
+            $this->setErroMensagem('alternativa_1', 'Answer 1, max 200 characters.');
         }
         if (strlen($this->alternativa2) < 1) {
-            $this->setErroMensagem('alternativa2', 'Answer number 2, min 1 character');
+            $this->setErroMensagem('alternativa_2', 'Answer number 2, min 1 character');
         }
         if (strlen($this->alternativa2) > 200) {
-            $this->setErroMensagem('alternativa2', 'Answer 2, max 200 characters.');
+            $this->setErroMensagem('alternativa_2', 'Answer 2, max 200 characters.');
         }
         if (strlen($this->alternativa3) < 1) {
-            $this->setErroMensagem('alternativa3', 'Answer number 3, min 1 character');
+            $this->setErroMensagem('alternativa_3', 'Answer number 3, min 1 character');
         }
         if (strlen($this->alternativa3) > 200) {
-            $this->setErroMensagem('alternativa3', 'Answer 3, max 200 characters.');
+            $this->setErroMensagem('alternativa_3', 'Answer 3, max 200 characters.');
         }
         if (strlen($this->alternativa4) < 1) {
-            $this->setErroMensagem('alternativa4', 'Answer number 4, min 1 character.');
+            $this->setErroMensagem('alternativa_4', 'Answer number 4, min 1 character.');
         }
         if (strlen($this->alternativa4) > 200) {
-            $this->setErroMensagem('alternativa4', 'Answer 4, max 200 characters..');
+            $this->setErroMensagem('alternativa_4', 'Answer 4, max 200 characters..');
         }
         if (strlen($this->alternativa5) < 1) {
-            $this->setErroMensagem('alternativa5', 'Answer number 4, min 1 character');
+            $this->setErroMensagem('alternativa_5', 'Answer number 4, min 1 character');
         }
         if (strlen($this->alternativa5) > 200) {
-            $this->setErroMensagem('alternativa5', 'Answer 5, max 200 characters.');
+            $this->setErroMensagem('alternativa_5', 'Answer 5, max 200 characters.');
         }
 
     }

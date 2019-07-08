@@ -10,7 +10,8 @@
 
     <form action="<?= URL_RAIZ . 'perguntas/relatorio';?>" method="get">
         <input type="hidden" name="_metodo" value="GET">
-        <button type="submit" class="btn btn-success">Relatorio</button>
+        <button type="submit" class="btn btn-success" name="filterSelect">Relatorio</button>
+
     </form>
 
     <form action="<?= URL_RAIZ . 'login' ?>" method="post">
@@ -115,5 +116,9 @@
     #editar{
         color: black;
         background-color: #2b669a;
+    }
+    #alternativa_1, #alternativa_2, #alternativa_3, #alternativa_4, #alternativa_5, #pergunta {
+        color: white;
+        background-color: darkslategrey;
     }
 </style>
