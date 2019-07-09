@@ -33,6 +33,8 @@ class PerguntaControlador extends Controlador
         public function armazenar()
     {
         $this->verificarLogado();
+        $foto = array_key_exists('foto_pergunta', $_FILES) ? $_FILES['foto_pergunta'] : null;
+
         $pergunta = new Pergunta(
             null,
             DW3Sessao::get('id'),
@@ -44,7 +46,7 @@ class PerguntaControlador extends Controlador
             $_POST['alternativa_3'],
             $_POST['alternativa_4'],
             $_POST['alternativa_5'],
-            null,
+            $foto,
             0,
             $_POST['correta']
 

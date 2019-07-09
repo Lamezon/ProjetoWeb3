@@ -18,10 +18,10 @@
     body{
         color: white;
 
-        background-image: linear-gradient(black, #1f3c52);
-        background-repeat: no-repeat;
+        background-image: linear-gradient(#1f3c52, black);
+        background-repeat: repeat-x;
 
-        background-size: 5000px 1400px;
+        background-size: 6200px 1400px;
     }
     a{
         color: white;

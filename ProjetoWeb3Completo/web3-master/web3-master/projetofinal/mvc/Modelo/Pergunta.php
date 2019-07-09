@@ -1,8 +1,12 @@
 <?php
+
 namespace Modelo;
+
+use Framework\DW3ImagemUpload;
 use Framework\DW3Sessao;
 use \PDO;
 use \Framework\DW3BancoDeDados;
+
 class Pergunta extends Modelo
 {
     //SELECT p.id_usuario, p.criador, p.dificuldade, p.pergunta, p.alternativa_1,p.alternativa_2,p.alternativa_3,p.alternativa_4,p.alternativa_5 FROM perguntas p ORDER BY p.id_usuario LIMIT 10 OFFSET 1
@@ -69,19 +73,21 @@ class Pergunta extends Modelo
     {
         return $this->id;
     }
+
     public function getFotoPergunta()
     {
         return $this->foto_pergunta;
     }
+
     public function getErros()
     {
         return $this->erros;
     }
+
     public function getCorreta()
     {
         return $this->correta;
     }
-
 
 
     public function getIdUsuario()
@@ -142,11 +148,15 @@ class Pergunta extends Modelo
     {
 
         $this->verificarErros();
-
         $this->inserir();
+        $this->salvarImagem();
+
+
     }
+
     private function inserir()
     {
+
 
         DW3BancoDeDados::getPdo()->beginTransaction();
         $comando = DW3BancoDeDados::prepare(self::INSERIR);
@@ -160,7 +170,7 @@ class Pergunta extends Modelo
         $comando->bindValue(8, $this->alternativa3, PDO::PARAM_STR);
         $comando->bindValue(9, $this->alternativa4, PDO::PARAM_STR);
         $comando->bindValue(10, $this->alternativa5, PDO::PARAM_STR);
-        $comando->bindValue(11, $this->foto_pergunta, PDO::PARAM_STR);
+        $comando->bindValue(11, $this->getImagem(), PDO::PARAM_STR);
         $comando->bindValue(12, $this->erros, PDO::PARAM_STR);
         $comando->bindValue(13, $this->correta, PDO::PARAM_STR);
 
@@ -169,6 +179,7 @@ class Pergunta extends Modelo
         DW3BancoDeDados::getPdo()->commit();
 
     }
+
     public static function buscarId($id)
     {
         $comando = DW3BancoDeDados::prepare(self::BUSCAR_ID);
@@ -196,6 +207,7 @@ class Pergunta extends Modelo
         }
         return $objeto;
     }
+
     public static function buscarTodos($limit = 10, $offset = 0)
     {
         $comando = DW3BancoDeDados::prepare(self::BUSCAR_TODOS);
@@ -229,7 +241,7 @@ class Pergunta extends Modelo
     {
 
         $int = (int)$dificuldade;
-        if($int==0){
+        if ($int == 0) {
             return self::buscarTodos();
 
         }
@@ -259,12 +271,14 @@ class Pergunta extends Modelo
         }
         return $objetos;
     }
+
     public static function contarTodos()
     {
         $registros = DW3BancoDeDados::query(self::CONTAR_TODOS);
         $total = $registros->fetch();
         return intval($total[0]);
     }
+
     public static function destruir($id)
     {
         $comando = DW3BancoDeDados::prepare(self::DELETAR_RESPOSTAS);
@@ -275,6 +289,27 @@ class Pergunta extends Modelo
         $comando->execute();
 
     }
+
+    private function salvarImagem()
+    {
+
+        if (DW3ImagemUpload::isValida($this->foto_pergunta)) {
+            $nomeCompleto = PASTA_PUBLICO . "img/{$this->getId()}.png";
+
+            DW3ImagemUpload::salvar($this->foto_pergunta, $nomeCompleto);
+            $this->foto_pergunta = $nomeCompleto;
+        }
+    }
+
+    public function getImagem()
+    {
+        $imagemNome = "{$this->id}.png";
+        if (!DW3ImagemUpload::existe($imagemNome)) {
+            $imagemNome = 'padrao.png';
+        }
+        return $imagemNome;
+    }
+
     protected function verificarErros()
     {
         if (strlen($this->pergunta) < 10) {

@@ -38,14 +38,6 @@ class Usuario extends Modelo
         return $this->login;
     }
 
-    public function getImagem()
-    {
-        $imagemNome = "{$this->id}.png";
-        if (!DW3ImagemUpload::existe($imagemNome)) {
-            $imagemNome = 'padrao.png';
-        }
-        return $imagemNome;
-    }
 
     public function verificarSenha($senhaPlana)
     {
@@ -93,14 +85,6 @@ class Usuario extends Modelo
         $comando->execute();
         $this->id = DW3BancoDeDados::getPdo()->lastInsertId();
         DW3BancoDeDados::getPdo()->commit();
-    }
-
-    private function salvarImagem()
-    {
-        if (DW3ImagemUpload::isValida($this->photo)) {
-            $nomeCompleto = PASTA_PUBLICO . "img/{$this->id}.png";
-            DW3ImagemUpload::salvar($this->photo, $nomeCompleto);
-        }
     }
 
     public static function buscarLogin($login)

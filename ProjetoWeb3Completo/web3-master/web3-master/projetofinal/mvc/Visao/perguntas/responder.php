@@ -4,7 +4,8 @@
     <form class="form-horizontal" method="POST" name="resposta" action="<?= URL_RAIZ . 'perguntas/responder/' . $perguntas->getId() ?>">
         <fieldset>
             <legend id="titulo"><?= $perguntas->getPergunta()?></legend>
-            <legend><?= $perguntas->getFotoPergunta() ?></legend>
+            <legend><img src="<?= URL_IMG . $perguntas->getImagem()?>"></legend>
+
 
             <?php
 
@@ -94,6 +95,10 @@
     #select {
         color: black;
         background-color: green;
+    }
+    img {
+        height: 200px;
+        width: 800px;
     }
 
 </style>
