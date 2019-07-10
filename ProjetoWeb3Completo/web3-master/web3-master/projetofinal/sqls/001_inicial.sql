@@ -2,7 +2,6 @@ CREATE TABLE `usuarios` (
 	`id` INT NOT NULL AUTO_INCREMENT,
 	`login` varchar(255) NOT NULL UNIQUE,
 	`password` varchar(255) NOT NULL,
-	`photo` varchar(1024) NOT NULL,
 	PRIMARY KEY (`id`)
 );
 

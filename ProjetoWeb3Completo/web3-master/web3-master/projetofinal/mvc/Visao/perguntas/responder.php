@@ -3,6 +3,7 @@
 
     <form class="form-horizontal" method="POST" name="resposta" action="<?= URL_RAIZ . 'perguntas/responder/' . $perguntas->getId() ?>">
         <fieldset>
+            <legend id="numeroQuestao"> Question (<?= $perguntas->getId()?>)</legend>
             <legend id="titulo"><?= $perguntas->getPergunta()?></legend>
             <legend><img src="<?= URL_IMG . $perguntas->getImagem()?>"></legend>
 
@@ -26,7 +27,6 @@
 
             <h3>Correct Answer is:</h3>
                 <select name="respostaSelecionada" id="select">
-                    <option selected="selected" value=0 disabled="">----</option>
                     <option value=1>Answer 1</option>
                     <option value=2>Answer 2</option>
                     <option value=3>Answer 3</option>
@@ -97,7 +97,7 @@
         background-color: green;
     }
     img {
-        height: 200px;
+        height: 400px;
         width: 800px;
     }
 

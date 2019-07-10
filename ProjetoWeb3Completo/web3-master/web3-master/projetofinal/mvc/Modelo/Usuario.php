@@ -13,17 +13,14 @@ class Usuario extends Modelo
     private $login;
     private $password;
     private $password_secundario;
-    private $photo;
 
     public function __construct(
         $login,
         $password,
-        $photo = null,
         $id = null
     ) {
         $this->id = $id;
         $this->login = $login;
-        $this->photo = $photo;
         $this->password_secundario = $password;
         $this->password = password_hash($password, PASSWORD_BCRYPT);
     }
@@ -39,9 +36,9 @@ class Usuario extends Modelo
     }
 
 
-    public function verificarSenha($senhaPlana)
+    public function verificarSenha($password_secundario)
     {
-        return password_verify($senhaPlana, $this->password);
+        return password_verify($password_secundario, $this->password);
     }
 
     protected function verificarErros()
@@ -56,10 +53,6 @@ class Usuario extends Modelo
         if (self::buscarLogin($this->login) != null ) {
             $this->setErroMensagem('login', 'Login already used.');
         }
-        if (DW3ImagemUpload::existeUpload($this->photo)
-            && !DW3ImagemUpload::isValida($this->photo)) {
-            $this->setErroMensagem('photo', 'Picture with size max = 500 KB.');
-        }
         if ($_POST["password"] !== $_POST["password2"]) {
             $this->setErroMensagem('password2', 'Password do not match, try again!');
         }
@@ -73,7 +66,6 @@ class Usuario extends Modelo
     public function salvar()
     {
         $this->inserir();
-        $this->salvarImagem();
     }
 
     private function inserir()
@@ -98,7 +90,6 @@ class Usuario extends Modelo
             $objeto = new Usuario(
                 $registro['login'],
                 '',
-                null,
                 $registro['id']
 
             );

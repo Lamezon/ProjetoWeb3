@@ -17,7 +17,6 @@ class LoginControlador extends Controlador
         if ($usuario && $usuario->verificarSenha($_POST['password'])) {
             DW3Sessao::set('login', $usuario->getLogin());
             DW3Sessao::set('id', $usuario->getId());
-            DW3Sessao::set('photo', $usuario->getImagem());
             $this->redirecionar(URL_RAIZ . 'perguntas');
         } else {
             $this->setErros(['login' => 'Login or Password do not match']);
