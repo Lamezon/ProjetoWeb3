@@ -21,6 +21,7 @@ class Pergunta extends Modelo
     const DELETAR = 'DELETE FROM perguntas WHERE id = ?';
     const DELETAR_RESPOSTAS = 'DELETE FROM usuarioresposta WHERE id_pergunta = ?';
     const CONTAR_TODOS = 'SELECT count(id) FROM perguntas';
+    const UPDATE_ERROS = 'UPDATE `perguntas` SET erros = ? WHERE id = ?';
     private $id;
     private $id_usuario;
     private $criador;
@@ -208,6 +209,14 @@ class Pergunta extends Modelo
         return $objeto;
     }
 
+    public static function atualizaErros($erros, $id_pergunta){
+        DW3BancoDeDados::getPdo()->beginTransaction();
+        $comando = DW3BancoDeDados::prepare(self::UPDATE_ERROS);
+        $comando->bindValue(1, $erros+1, PDO::PARAM_INT);
+        $comando->bindValue(2, $id_pergunta, PDO::PARAM_INT);
+        $comando->execute();
+        DW3BancoDeDados::getPdo()->commit();
+    }
     public static function buscarTodos($limit = 10, $offset = 0)
     {
         $comando = DW3BancoDeDados::prepare(self::BUSCAR_TODOS);

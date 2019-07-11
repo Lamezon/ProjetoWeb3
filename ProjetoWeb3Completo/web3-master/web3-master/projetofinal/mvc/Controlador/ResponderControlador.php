@@ -30,6 +30,7 @@ class ResponderControlador extends Controlador
             'resposta' => $resposta_selecionada
         ]);
         $this->armazenarResposta();
+
     }
 
     public function armazenarResposta()
@@ -42,8 +43,10 @@ class ResponderControlador extends Controlador
             (int)$_POST['respostaSelecionada']
 
         );
+        $pergunta = Pergunta::buscarId(DW3Sessao::get('id_pergunta'));
+        
         Resposta::salvar($resposta);
-
+        Resposta::verificaResposta($resposta, $pergunta);
     }
 
 

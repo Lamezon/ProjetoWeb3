@@ -58,4 +58,26 @@ class Resposta extends Modelo
     }
 
 
+    public function verificaResposta($resposta, $pergunta){
+
+        ?> <style>
+            #resposta<?=$resposta->getResposta()?>{
+                background-color: red;
+            }
+
+            #resposta<?=$pergunta->getCorreta()?> {
+                background-color: green;
+            }
+
+            #confirmbutton, #select, #confirmTexto {
+                visibility: hidden;
+            }
+        </style>
+
+        <?php
+        if($pergunta->getCorreta()!=$resposta->getResposta()){
+            Pergunta::atualizaErros($pergunta->getErros(), $pergunta->getId());
+        }
+    }
+
 }

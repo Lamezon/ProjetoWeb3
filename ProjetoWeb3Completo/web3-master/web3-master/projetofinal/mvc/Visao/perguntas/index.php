@@ -81,8 +81,26 @@
     foreach ($perguntas as $perguntas) : ?>
         <form action="<?= URL_RAIZ . 'perguntas/responder/' . $perguntas->getId();?>" method="post">
             <input type="hidden" name="_metodo" value="GET">
-            <?= $perguntas->getPergunta() ?>
-            <button type="submit" class="btn btn-xs btn-group-xs" title="Answer" id="editar"> ANSWER
+            <?= $perguntas->getPergunta();
+            if($perguntas->getCriador()==\Framework\DW3Sessao::get('login')){
+                ?><style>
+                #id<?=$perguntas->getCriador()?>{
+
+                    visibility: hidden;
+                }
+                </style><?php
+            }else{
+                ?><style>
+                #id<?=$perguntas->getCriador()?>{
+
+                    color: black;
+                    background-color: #2b669a;
+                }
+                </style><?php
+            }
+            ?>
+
+            <button type="submit" class="btn btn-xs btn-group-xs" title="Answer" id="id<?=$perguntas->getCriador()?>"> ANSWER
                 <span class="glyphicon glyphicon-education"></span>
             </button>
         </form>

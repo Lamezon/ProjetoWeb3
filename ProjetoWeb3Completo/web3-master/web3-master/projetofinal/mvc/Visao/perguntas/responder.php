@@ -7,7 +7,6 @@
             <legend id="titulo"><?= $perguntas->getPergunta()?></legend>
             <legend><img src="<?= URL_IMG . $perguntas->getImagem()?>"></legend>
 
-
             <?php
 
             switch ($perguntas->getDificuldade()){
@@ -16,16 +15,16 @@
                 case '3': ?><hard>Hard Question </hard><?php break;
             }
             ?>
-            <div class="form-group" name="respostas">
-                <h4>Answer 1: </h4><h5><?=$perguntas->getAlternativa1()?></h5>
-                <h4>Answer 2: </h4><h5><?=$perguntas->getAlternativa2()?></h5>
-                <h4>Answer 3: </h4><h5><?=$perguntas->getAlternativa3()?></h5>
-                <h4>Answer 4: </h4><h5><?=$perguntas->getAlternativa4()?></h5>
-                <h4>Answer 5: </h4><h5><?=$perguntas->getAlternativa5()?></h5>
+            <div class="form-group" name="respostas" id="alternativasPergunta">
+                <h4 id="resposta1">Answer 1: </h4><h5 id="resposta1"><?=$perguntas->getAlternativa1()?></h5>
+                <h4 id="resposta2">Answer 2: </h4><h5 id="resposta2"><?=$perguntas->getAlternativa2()?></h5>
+                <h4 id="resposta3">Answer 3: </h4><h5 id="resposta3"><?=$perguntas->getAlternativa3()?></h5>
+                <h4 id="resposta4">Answer 4: </h4><h5 id="resposta4"><?=$perguntas->getAlternativa4()?></h5>
+                <h4 id="resposta5">Answer 5: </h4><h5 id="resposta5"><?=$perguntas->getAlternativa5()?></h5>
             </div>
 
 
-            <h3>Correct Answer is:</h3>
+            <h3 id="confirmTexto">Correct Answer is:</h3>
                 <select name="respostaSelecionada" id="select">
                     <option value=1>Answer 1</option>
                     <option value=2>Answer 2</option>
@@ -100,5 +99,6 @@
         height: 400px;
         width: 800px;
     }
+
 
 </style>
