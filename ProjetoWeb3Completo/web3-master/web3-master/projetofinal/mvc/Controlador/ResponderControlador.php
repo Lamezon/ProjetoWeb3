@@ -13,12 +13,18 @@ class ResponderControlador extends Controlador
     {
         $this->verificarLogado();
         $perguntas = Pergunta::buscarId($id);
-        DW3Sessao::set('id_pergunta', $perguntas->getId());
-        DW3Sessao::set('id_usuario', $perguntas->getIdUsuario());
-        $_POST['respostaSelecionada']=0;
-        $this->visao('perguntas/responder.php', [
-            'perguntas' => $perguntas
-        ]);
+        $this->verificarUsuario($perguntas);
+        if( Resposta::buscaRespondido($perguntas)==true){
+            DW3Sessao::setFlash('mensagemFlash', 'You can not answer this question again.');
+            $this->redirecionar(URL_RAIZ . 'perguntas');
+        }else {
+            DW3Sessao::set('id_pergunta', $perguntas->getId());
+            DW3Sessao::set('id_usuario', $perguntas->getIdUsuario());
+            $_POST['respostaSelecionada'] = 0;
+            $this->visao('perguntas/responder.php', [
+                'perguntas' => $perguntas
+            ]);
+        }
     }
     public function respondida($id)
     {
@@ -44,9 +50,9 @@ class ResponderControlador extends Controlador
 
         );
         $pergunta = Pergunta::buscarId(DW3Sessao::get('id_pergunta'));
-        
         Resposta::salvar($resposta);
         Resposta::verificaResposta($resposta, $pergunta);
+        DW3Sessao::setFlash('mensagemFlash', 'Answer Saved! Thanks.');
     }
 
 

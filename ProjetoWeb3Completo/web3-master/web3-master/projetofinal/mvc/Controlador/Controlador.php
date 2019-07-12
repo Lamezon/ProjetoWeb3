@@ -21,11 +21,11 @@ abstract class Controlador extends DW3Controlador
 
     protected function verificarUsuario($pergunta)
     {
-        var_dump($pergunta);
-        exit();
         $login = $this->getLogin();
-        if ($login == null) {
-            $this->redirecionar(URL_RAIZ . 'login');
+        if ($login == $pergunta->getCriador()) {
+            DW3Sessao::setFlash('mensagemFlash', 'Can not answer your own question.');
+            $this->redirecionar(URL_RAIZ . 'perguntas');
+
         }
     }
 

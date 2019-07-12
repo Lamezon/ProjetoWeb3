@@ -1,6 +1,7 @@
 <?php
 namespace Modelo;
 
+use Framework\DW3Sessao;
 use \PDO;
 use \Framework\DW3BancoDeDados;
 use \Framework\DW3ImagemUpload;
@@ -8,6 +9,8 @@ use \Framework\DW3ImagemUpload;
 class Resposta extends Modelo
 {
     const INSERIR = 'INSERT INTO `usuarioresposta` (`id_usuario`, `id_pergunta`, `resposta`) VALUES ( ?, ?, ?);';
+    const VERIFICAR = 'SELECT COUNT(*) as "Registros" FROM usuarioresposta WHERE (id_usuario = ? AND id_pergunta = ?);';
+
     private $id_usuario;
     private $id_pergunta;
     private $resposta;
@@ -75,8 +78,22 @@ class Resposta extends Modelo
         </style>
 
         <?php
+
         if($pergunta->getCorreta()!=$resposta->getResposta()){
             Pergunta::atualizaErros($pergunta->getErros(), $pergunta->getId());
+        }
+    }
+    public static function buscaRespondido($pergunta)
+    {
+        $comando = DW3BancoDeDados::prepare(self::VERIFICAR);
+        $comando->bindValue(1, (int)DW3Sessao::get('id_usuario'), PDO::PARAM_INT);
+        $comando->bindValue(2, (int)$pergunta->getId(), PDO::PARAM_INT);
+        $comando->execute();
+        $registro = $comando->fetch();
+        if($registro[0]>=1){
+            return true;
+        }else{
+            return false;
         }
     }
 

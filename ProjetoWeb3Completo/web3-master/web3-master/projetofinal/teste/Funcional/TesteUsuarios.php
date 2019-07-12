@@ -10,19 +10,19 @@ class TesteUsuarios extends Teste
     public function testeCriar()
     {
         $resposta = $this->get(URL_RAIZ . 'usuarios/criar');
-        $this->verificarContem($resposta, 'Cadastre-se');
+        $this->verificarContem($resposta, 'Register');
     }
 
     public function testeArmazenar()
     {
         $resposta = $this->post(URL_RAIZ . 'usuarios', [
-            'email' => 'mario@teste.com',
-            'senha' => '123',
+            'login' => 'teste',
+            'password' => '1234',
         ]);
         $this->verificarRedirecionar($resposta, URL_RAIZ . 'usuarios/sucesso');
         $resposta = $this->get(URL_RAIZ . 'usuarios/sucesso');
-        $this->verificarContem($resposta, 'Parabéns!');
-        $query = DW3BancoDeDados::query('SELECT * FROM usuarios WHERE email = "mario@teste.com"');
+        $this->verificarContem($resposta, 'Hurray');
+        $query = DW3BancoDeDados::query('SELECT * FROM usuarios WHERE login = "teste"');
         $bdUsuarios = $query->fetchAll();
         $this->verificar(count($bdUsuarios) == 1);
     }

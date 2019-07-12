@@ -1,15 +1,16 @@
 <?php
-namespace Teste;
+namespace teste;
 
 use \Modelo\Usuario;
-use \Framework\DW3Teste;
+use \framework\DW3Teste;
 use \Framework\DW3Sessao;
+
+
 
 
 class Teste extends DW3Teste
 {
 	protected $usuario;
-
 	public function logar()
 	{
 		$this->usuario = new Usuario('usuario', 'usuario123');
